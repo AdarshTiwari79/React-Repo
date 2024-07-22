@@ -19,8 +19,20 @@ function Todo() {
     setNewTodo("");
   };
 
+  let deleteAction = (id) => {
+    let newTodos = todos.filter((todo) => {
+      todo.id != id;
+    });
+    setTodos(newTodos);
+  };
+
   let list = todos.map((todo) => {
-    return <li key={todo.id}>{todo.task}</li>;
+    return (
+      <li key={todo.id}>
+        <span>{todo.task}</span>{" "}
+        <button onClick={() => deleteAction(todo.id)}>Delete</button>
+      </li>
+    );
   });
 
   return (
@@ -33,6 +45,7 @@ function Todo() {
       <button onClick={updatedTodos}>Add Task</button>
 
       <h3>Task todo List</h3>
+
       <ul>{list}</ul>
     </>
   );
