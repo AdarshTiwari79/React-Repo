@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 function Todo() {
-  let todosList = ["sample task"];
+  let todosList = [{ task: "sample task", id: uuidv4() }];
   let [todos, setTodos] = useState(todosList);
   let [newTodo, setNewTodo] = useState("");
 
@@ -13,13 +14,13 @@ function Todo() {
 
   let updatedTodos = () => {
     setTodos((prevTodes) => {
-      return [...prevTodes, newTodo];
+      return [...prevTodes, { task: newTodo, id: uuidv4() }];
     });
     setNewTodo("");
   };
 
   let list = todos.map((todo) => {
-    return <li>{todo}</li>;
+    return <li key={todo.id}>{todo.task}</li>;
   });
 
   return (
