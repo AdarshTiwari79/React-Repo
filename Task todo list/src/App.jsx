@@ -1,9 +1,10 @@
 import "./App.css";
-import Lottery from "./lottery";
+import Lottery from "./Lottery Game/lottery";
+
 function App() {
   return (
     <>
-      <Lottery />
+      <Lottery n={4} winningSum={20} />
     </>
   );
 }
