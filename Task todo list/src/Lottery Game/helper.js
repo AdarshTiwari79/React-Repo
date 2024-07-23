@@ -6,11 +6,11 @@ function getNum(n) {
   return numArr;
 }
 
-function winCondition(arr) {
+function sum(arr) {
   let total = arr.reduce((sum, el) => {
     return sum + el;
   });
   return total;
 }
 
-export { getNum, winCondition };
+export { getNum, sum };
