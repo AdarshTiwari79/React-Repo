@@ -2,7 +2,8 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 function Todo() {
-  let todosList = [{ task: "sample task", id: uuidv4() }];
+  let todosList = [{ task: "sample task", id: uuidv4(), isDone: false }];
+
   let [todos, setTodos] = useState(todosList);
   let [newTodo, setNewTodo] = useState("");
 
@@ -14,23 +15,46 @@ function Todo() {
 
   let updatedTodos = () => {
     setTodos((prevTodes) => {
-      return [...prevTodes, { task: newTodo, id: uuidv4() }];
+      return [...prevTodes, { task: newTodo, id: uuidv4(), isDone: false }];
     });
     setNewTodo("");
   };
 
   let deleteAction = (id) => {
     let newTodos = todos.filter((todo) => {
-      todo.id != id;
+      todo.id !== id;
     });
     setTodos(newTodos);
+  };
+
+  let markAsDone = (id) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, isDone: true };
+        } else {
+          return todo;
+        }
+      })
+    );
+  };
+
+  let markAsAllDone = () => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) => {
+        return { ...todo, isDone: true };
+      })
+    );
   };
 
   let list = todos.map((todo) => {
     return (
       <li key={todo.id}>
-        <span>{todo.task}</span>{" "}
+        <span style={todo.isDone ? { textDecorationLine: "line-through" } : {}}>
+          {todo.task}
+        </span>{" "}
         <button onClick={() => deleteAction(todo.id)}>Delete</button>
+        <button onClick={() => markAsDone(todo.id)}>Mark as done</button>
       </li>
     );
   });
@@ -47,6 +71,8 @@ function Todo() {
       <h3>Task todo List</h3>
 
       <ul>{list}</ul>
+
+      <button onClick={markAsAllDone}>Mark as all done</button>
     </>
   );
 }
