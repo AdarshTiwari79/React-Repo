@@ -1,10 +1,9 @@
 import "./App.css";
-import Todo from "./todo";
-
+import Lottery from "./lottery";
 function App() {
   return (
     <>
-      <Todo />
+      <Lottery />
     </>
   );
 }
