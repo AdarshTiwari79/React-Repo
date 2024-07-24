@@ -15,7 +15,7 @@ export default function SearchBox({ data }) {
   let handleSubmit = async (event) => {
     try {
       event.preventDefault();
-      console.log(city);
+      // console.log(city);
 
       // calling api data containing function
 
