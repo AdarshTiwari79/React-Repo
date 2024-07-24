@@ -5,7 +5,7 @@ async function getWeatherInfo(city) {
   try {
     let res = await fetch(`${API_URL}?q=${city}&appid=${API_KEY}&units=metric`);
     let jsonRes = await res.json();
-    console.log(jsonRes);
+    // console.log(jsonRes);
 
     // storing api fetched data as we want, basically customizing data to display
     let result = {
@@ -17,8 +17,8 @@ async function getWeatherInfo(city) {
       feelsLike: jsonRes.main.feels_like,
       weather: jsonRes.weather[0].description,
     };
-    console.log("__________________________________________");
-    console.log(result);
+    // console.log("__________________________________________");
+    // console.log(result);
     return result;
   } catch (err) {
     throw error;
