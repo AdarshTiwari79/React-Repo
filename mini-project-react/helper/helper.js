@@ -6,12 +6,13 @@ async function getWeatherInfo(city) {
   let jsonRes = await res.json();
   console.log(jsonRes);
   let result = {
+    city: city,
     temp: jsonRes.main.temp,
     tempMin: jsonRes.main.temp_min,
     tempMax: jsonRes.main.temp_max,
     humidity: jsonRes.main.humidity,
     feelsLike: jsonRes.main.feels_like,
-    weather: jsonRes.weather[1].description,
+    weather: jsonRes.weather[0].description,
   };
   console.log("__________________________________________");
   console.log(result);
