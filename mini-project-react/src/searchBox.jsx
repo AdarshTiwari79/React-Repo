@@ -4,19 +4,29 @@ import { useState } from "react";
 import "./searchBox.css";
 import { getWeatherInfo } from "../helper/helper";
 
-export default function SearchBox() {
+export default function SearchBox({ data }) {
   let [city, setCity] = useState("");
+  let [err, setErr] = useState(false);
 
   let updateText = (event) => {
     return setCity(event.target.value);
   };
 
-  let handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(city);
-    // calling api function
-    getWeatherInfo(city);
-    setCity("");
+  let handleSubmit = async (event) => {
+    try {
+      event.preventDefault();
+      console.log(city);
+
+      // calling api data containing function
+
+      let info = await getWeatherInfo(city);
+      // sending data to infoBox as function prop variable
+      data(info);
+      setCity("");
+      setErr(false);
+    } catch (error) {
+      setErr(true);
+    }
   };
 
   return (
@@ -34,6 +44,9 @@ export default function SearchBox() {
         <Button variant="contained" type="submit">
           Search
         </Button>
+        <br></br>
+        <br></br>
+        {err && <p style={{ color: "red" }}>No such place in our API</p>}
       </form>
     </div>
   );

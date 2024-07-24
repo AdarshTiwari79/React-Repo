@@ -3,31 +3,36 @@ import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import ThunderstormIcon from "@mui/icons-material/Thunderstorm";
+import FlareIcon from "@mui/icons-material/Flare";
+import AcUnitIcon from "@mui/icons-material/AcUnit";
 
-export default function InfoBox() {
+export default function InfoBox({ info }) {
   const INIT_IMG = "/dustyImage.jpg";
-
-  let info = {
-    city: "delhi",
-    temp: 25.05,
-    tempMin: 25,
-    tempMax: 26,
-    humidity: 68,
-    feelsLike: 31,
-    weather: "cloudy",
-  };
+  const ColdImg = "/cold.jpg";
+  const HotImg = "/hotweather.jpg";
+  const RainImg = "/rain.jpg";
 
   return (
     <div className="InfoBox">
       <Card sx={{ maxWidth: 345 }}>
         <CardMedia
           sx={{ height: 140 }}
-          image={INIT_IMG}
+          image={
+            info.humidity > 80 ? RainImg : info.temp > 15 ? HotImg : ColdImg
+          }
           title="dusty weather"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Weather Report : <b>{info.city.toUpperCase()}</b>
+            Weather Report : <b>{info.city}</b>
+            {info.humidity > 80 ? (
+              <ThunderstormIcon />
+            ) : info.temp > 15 ? (
+              <FlareIcon />
+            ) : (
+              <AcUnitIcon />
+            )}
           </Typography>
           <Typography variant="body2" color="text.secondary" component="span">
             <p>Weather = {info.weather}</p>
