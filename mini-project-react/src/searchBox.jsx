@@ -26,6 +26,7 @@ export default function SearchBox({ data }) {
       setErr(false);
     } catch (error) {
       setErr(true);
+      setCity("");
     }
   };
 
