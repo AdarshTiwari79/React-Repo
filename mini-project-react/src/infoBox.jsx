@@ -19,7 +19,13 @@ export default function InfoBox({ info }) {
         <CardMedia
           sx={{ height: 140 }}
           image={
-            info.humidity > 80 ? RainImg : info.temp > 15 ? HotImg : ColdImg
+            info.humidity > 80
+              ? RainImg
+              : info.temp > 15
+              ? HotImg
+              : info.temp <= 15
+              ? ColdImg
+              : INIT_IMG
           }
           title="dusty weather"
         />
@@ -30,8 +36,10 @@ export default function InfoBox({ info }) {
               <ThunderstormIcon />
             ) : info.temp > 15 ? (
               <FlareIcon />
-            ) : (
+            ) : info.temp <= 15 ? (
               <AcUnitIcon />
+            ) : (
+              ""
             )}
           </Typography>
           <Typography variant="body2" color="text.secondary" component="span">
